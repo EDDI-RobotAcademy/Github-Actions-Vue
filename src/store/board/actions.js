@@ -15,8 +15,9 @@ export default {
                 alert('게시물 등록 성공: ' + JSON.stringify(res.data))
                 return res
             })
-            .catch(() => {
-                alert('문제 발생!')
+            .catch((err) => {
+                //alert('문제 발생!')
+                throw Error('API 에러 발생!')
             })
     },
     requestBoardListToSpring ({ commit }) {
