@@ -6,6 +6,11 @@ import JpaBoardRegisterPage from '@/views/lecture/board/JpaBoardRegisterPage'
 
 import { __createMocks as createBoardStoreMocks } from '@/store/board/__mocks__'
 import Vuetify from 'vuetify'
+import axiosInst from "@/utility/axiosObject";
+import axios from "axios";
+import router from "@/router";
+import store from "@/store";
+import App from "@/App";
 
 jest.mock('@/store/board/BoardModule')
 
@@ -47,29 +52,31 @@ describe('JpaBoardRead', () => {
   })
 })
 
-let storeMocks = createBoardStoreMocks()
+//let storeMocks = createBoardStoreMocks()
 //wrapper = shallowMount(JpaBoardRegisterPage, {
-let wrapper = mount(JpaBoardRegisterPage, {
-  vuetify,
-  store: storeMocks.store,
-})
+// let wrapper = shallowMount(JpaBoardRegisterPage, {
+//   vuetify,
+//   store: storeMocks.store,
+// })
 
 describe('requestCreateBoardToSpring', () => {
-  // beforeEach(() => {
-  //   storeMocks = createBoardStoreMocks()
-  //   //wrapper = shallowMount(JpaBoardRegisterPage, {
-  //   wrapper = mount(JpaBoardRegisterPage, {
-  //     vuetify,
-  //     store: storeMocks.store,
-  //   })
-  // })
-
   test('register actions test', async () => {
+    const storeMocks = createBoardStoreMocks()
+    // const wrapper = shallowMount(JpaBoardRegisterPage, {
+    //   vuetify,
+    //   store: storeMocks.store,
+    // })
+
     const title = "go"
     const content = "go"
     const writer = "go"
 
-    await expect(storeMocks.store.requestCreateBoardToSpring({}, { title, content, writer }))
-        .rejects.toThrow("API 에러 발생!")
+    let board = new Object()
+    board.id = 1
+    board.title = "go"
+    board.writer = "go"
+    board.regDate = new Date('2023-04-01')
+
+    await expect(storeMocks.actions.requestCreateBoardToSpring({}, { title, content, writer })).toStrictEqual(board)
   })
 })

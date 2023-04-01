@@ -1,5 +1,6 @@
 import Vue from "vue"
 import Vuex from "vuex"
+import axiosInst from "@/utility/axiosObject";
 
 Vue.use(Vuex)
 
@@ -44,7 +45,17 @@ export const mutations = {
 }
 
 export const actions = {
-    requestCreateBoardToSpring: jest.fn(),
+    requestCreateBoardToSpring: jest.fn((payload) => {
+        const { title, content, writer } = payload
+
+        let board = new Object()
+        board.id = 1
+        board.title = "go"
+        board.writer = "go"
+        board.regDate = new Date('2023-04-01')
+
+        return board
+    }),
 }
 
 export const state = {

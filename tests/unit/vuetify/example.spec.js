@@ -1,15 +1,21 @@
+import Vue from 'vue'
 import Vuetify from 'vuetify'
-import { mount } from '@vue/test-utils'
+
+Vue.use(Vuetify)
+
+import { shallowMount } from '@vue/test-utils'
 
 import JpaBoardRegisterPage from '@/views/lecture/board/JpaBoardRegisterPage'
+import router from "@/router";
 
 const vuetify = new Vuetify()
-const wrapper = mount(JpaBoardRegisterPage, {
+const wrapper = shallowMount(JpaBoardRegisterPage, {
+  router,
   vuetify
 })
 
 describe('JpaBoardRegisterPage.vue:', () => {
   it('1. Mounts properly', () => {
-    expect(wrapper.isVueInstance()).toBe(true)
+    expect(wrapper.vm).toBeTruthy();
   })
 })
